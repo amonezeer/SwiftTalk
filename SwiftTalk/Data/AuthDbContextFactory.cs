@@ -8,8 +8,6 @@ namespace SwiftTalk.Data
         public AuthDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AuthDbContext>();
-            optionsBuilder.UseSqlServer("Server=Amonezeer;Database=AuthAppDB_New;Integrated Security=True;TrustServerCertificate=True;");
-
             return new AuthDbContext(optionsBuilder.Options);
         }
     }

@@ -11,7 +11,7 @@ using SwiftTalk.Data;
 namespace SwiftTalk.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20250408175016_InitialCreate")]
+    [Migration("20250411154623_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

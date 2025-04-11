@@ -5,15 +5,23 @@ using Microsoft.Extensions.DependencyInjection;
 using SwiftTalk.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Windows.Media;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace SwiftTalk
 {
     public partial class App : Application
     {
         private readonly ServiceProvider _serviceProvider;
+        private readonly IConfiguration _configuration;
 
         public App()
         {
+            _configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+
             var services = new ServiceCollection();
             ConfigureServices(services);
             _serviceProvider = services.BuildServiceProvider();
@@ -23,8 +31,7 @@ namespace SwiftTalk
 
         private void ConfigureServices(ServiceCollection services)
         {
-            services.AddDbContext<AuthDbContext>(options =>
-                options.UseSqlServer("Server=Amonezeer;Database=AuthAppDB_New;Integrated Security=True;TrustServerCertificate=True;"));
+            services.AddDbContext<AuthDbContext>();
 
             services.AddScoped<DatabaseService>();
             services.AddScoped<EmailService>();
